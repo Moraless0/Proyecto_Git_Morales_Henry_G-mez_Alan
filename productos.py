@@ -64,6 +64,12 @@ def listar_productos():
         print(f"CANTIDAD: {cantidad}")
         contador += 1
 
+    regresar = input("Presione ENTER regresar...")
+    if regresar != "":
+            print("ERROR: Presione ENTER")
+    else:
+        return
+
 def editar_producto():
     nombre_buscar = input("Ingrese el nombre del cafe a editar: ")
 
