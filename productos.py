@@ -65,3 +65,30 @@ def listar_productos():
         print(f"NIVEL DE TOSTADO: {tostado}")
         print(f"CANTIDAD: {cantidad}")
         contador += 1
+
+def editar_producto():
+    nombre_buscar = input("Ingrese el nombre del cafe a editar: ")
+
+    try:
+        with open("data/productos.json", "r") as archivo:
+            datos = json.load(archivo)
+    except:
+        print("No hay datos.")
+        return
+
+    for cafe in datos:
+        if cafe["nombre"] == nombre_buscar:
+            cafe["descripcion"] = input("Nueva descripcion: ")
+            cafe["precio"] = float(input("Nuevo precio: "))
+            cafe["tostado"] = input("Nuevo tostado: ")
+            cafe["cantidad"] = int(input("Nueva cantidad: "))
+
+            with open("data/productos.json", "w") as archivo:
+                json.dump(datos, archivo, indent=4)
+
+            print("Producto actualizado.")
+            return
+
+    print("Producto no encontrado.")
+
+editar_producto()
