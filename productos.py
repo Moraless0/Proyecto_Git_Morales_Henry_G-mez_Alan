@@ -32,8 +32,6 @@ def agregar_producto():
 
 def listar_productos():
 
-
-
     try:
         with open("data/productos.json", "r") as archivo:
             datos = json.load(archivo) 
@@ -91,4 +89,24 @@ def editar_producto():
 
     print("Producto no encontrado.")
 
-editar_producto()
+def eliminar_producto():
+    nombre_eliminar = input("Ingrese el nombre del cafe a eliminar: ")
+
+    try:
+        with open("data/productos.json", "r") as archivo:
+            datos = json.load(archivo)
+    except:
+        print("No hay datos.")
+        return
+
+    for cafe in datos:
+        if cafe["nombre"] == nombre_eliminar:
+            datos.remove(cafe)
+
+            with open("data/productos.json", "w") as archivo:
+                json.dump(datos, archivo, indent=4)
+
+            print("Producto eliminado correctamente.")
+            return
+
+    print("Producto no encontrado.")
